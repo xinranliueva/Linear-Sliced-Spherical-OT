@@ -162,7 +162,7 @@
 </section>
 
 
-<!-- Teaser video-->
+<!-- Teaser Figure-->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
@@ -172,7 +172,7 @@
     </div>
   </div>
 </section>
-<!-- End teaser video -->
+<!-- End teaser Figure -->
 
 <!-- Paper abstract -->
 <section class="section hero is-light">
@@ -192,105 +192,89 @@
 <!-- End paper abstract -->
 
 
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel1.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
+<!-- Contributions -->
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Contributions</h2>
+        <div class="content has-text-justified">
+          <p>
+            <li>We propose Linear Spherical Sliced Optimal Transport (LSSOT) to embed spherical distributions into $L^2$ space while preserving their intrinsic spherical geometry. </li>
+            <li>We prove that LSSOT defines a metric (LSSOT distance), and demonstrate the superior computation efficiency over other baseline metrics.</li>
+            <li>We conduct a comprehensive set of experiments to show the effectiveness and efficiency of LSSOT in diverse applications, from point cloud analysis to cortical surface registration.</li>
+          </p>
+        </div>
       </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="MY ALT TEXT"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
     </div>
   </div>
-</div>
-</div>
 </section>
-<!-- End image carousel -->
+<!-- End Contributions -->
 
 
 
 
-<!-- Youtube video -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Video Presentation</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
+
+
+
+<!-- Computaion Efficiency -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Computation Efficiency</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/runtime/computation_log.png" alt="MY ALT TEXT"/>
+          <p>
+            Figure: pairwise distances runtime (log scale) comparison w.r.t the number of distributions. $N$ denotes sample sizes in each distribution. The number of slices is 500 for all slice-based methods.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Computaion Efficiency -->
+
+
+<!-- Experiments -->
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Experiments</h2>
+        <div class="content has-text-justified">
+          <h3 class="title is-4">Cortical Surface Registration</h3>
+          <p>
+            We verify the validity and efficiency of the proposed LSSOT method in comparing spherical cerebral cortex data for registration tasks. Cortical surface registration seeks to establish meaningful anatomical correspondences across subjects or time points.
+            <br> We leverage the Superfast Spherical Surface Registration (S3Reg) [1] neural network to perform atlas-based registration, which focuses on registering all surfaces to one atlas surface. We replace the original mean squared error (MSE) similarity loss with our LSSOT distance and other baselines, and evaluate the registration performance achieved by each similarity measure. Baselines include Spherical Sliced-Wasserstein (SSW) [2] and Stereographic Spherical Sliced Wasserstein Distances (S3W) [3] and the Sliced Wasserstein distance (SWD) [4] under Euclidean geometry.
+          </p>
           
-          <div class="publication-video">
-            <!-- Youtube embed code here -->
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
+          <img src="static/images/reg.png" alt="MY ALT TEXT"/>
+          <p>
+            Figure: qualitative registration results (middle columns) from a moving surface (left column) to the fixed surface (right column).
+          </p>
+
+          <img src="static/images/reg_results.png" alt="MY ALT TEXT"/>
+          <p>
+            Table: evaluation metrics on the test datasets (mean $\pm$ standard deviation) for sulcal depth registration of both hemispheres from NKI dataset (left hemispheres). The best two methods are bolded. The average training time for each epoch is also included in the bottom row of each scenario. We perform significance testing for the difference on Dice, Edge Dist. and Area Dist. against LSSOT. $^{**}$ denotes $p<0.001$ and $^{*}$ denotes $p<0.01$.
+          </p>
+        
+
+       
+          <h3 class="title is-4">Point Cloud Interpolation</h3>
+          <p> LSSOT can also be utilized in point cloud analysis, once each point cloud is endowed with a spherical representation. In this experiment, we explore the interpolations between point cloud pairs from the ModelNet dataset. Specifically, we train an autoencoder to project the original point clouds to a spherical latent space, to represent each of them as a spherical distribution. Then we apply gradient flow between the pairs of spherical distributions using the LSSOT metric along with SSW and Spherical OT. Finally, this transformation is reconstructed in the original space by the trained decoder, resulting in an interpolation between the original pairs.
+          </p>
+            <img src="static/images/interp.png" alt="MY ALT TEXT"/>
+          <p>
+            Figure: Top panel: the interpolation process between a pair of point clouds using gradient flow in the latent space $\mathbb{S}^2$. Bottom panel: gradient flow interpolations from a range hood to a bottle (left), and from a stool to a chair (right) using three metrics LSSOT, SSW and spherical OT.
+          </p>
         </div>
+
       </div>
     </div>
   </div>
 </section>
-<!-- End youtube video -->
-
-
-<!-- Video carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4"
-            type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video2">
-          <video poster="" id="video2" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4"
-            type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video3">
-          <video poster="" id="video3" autoplay controls muted loop height="100%">\
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4"
-            type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End video carousel -->
-
-
-
-
+<!-- End Experiments -->
 
 
 <!-- Paper poster -->
@@ -299,7 +283,7 @@
     <div class="container">
       <h2 class="title">Poster</h2>
 
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
+      <iframe  src="static/pdfs/LSSOT_poster_.pdf" width="100%" height="550">
           </iframe>
         
       </div>
@@ -309,13 +293,22 @@
 
 
 <!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>BibTex Code Here</code></pre>
-    </div>
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">References</h2>
+    <p>
+      <br>[1] Zhao, Fenqiang, Zhengwang Wu, Fan Wang, Weili Lin, Shunren Xia, Dinggang Shen, Li Wang, and Gang Li. "S3Reg: superfast spherical surface registration based on deep learning." IEEE transactions on medical imaging 40, no. 8 (2021): 1964-1976.
+      <br> 
+      <br>[2] Bonet, Clément, Paul Berg, Nicolas Courty, François Septier, Lucas Drumetz, and Minh Tan Pham. "Spherical Sliced-Wasserstein." In The Eleventh International Conference on Learning Representations.
+      <br> 
+      <br>[3] Tran, Huy, Yikun Bai, Abihith Kothapalli, Ashkan Shahbazi, Xinran Liu, Rocio P. Diaz Martin, and Soheil Kolouri. "Stereographic Spherical Sliced Wasserstein Distances." In International Conference on Machine Learning, pp. 48494-48564. PMLR, 2024.
+      <br> 
+      <br>[4] Bonneel, Nicolas, Julien Rabin, Gabriel Peyré, and Hanspeter Pfister. "Sliced and radon wasserstein barycenters of measures." Journal of Mathematical Imaging and Vision 51 (2015): 22-45.
+    </p>
+  </div>
 </section>
 <!--End BibTex citation -->
+
 
 
   <footer class="footer">
